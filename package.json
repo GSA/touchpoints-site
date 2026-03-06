@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@uswds/uswds": "^3.11.0",
-    "snyk": "^1.1295.0"
+    "snyk": "^1.1302.1"
   },
   "snyk": true,
   "devDependencies": {
