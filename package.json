@@ -18,7 +18,7 @@
     "watch": "gulp watch"
   },
   "dependencies": {
-    "@uswds/uswds": "^3.11.0",
+    "@uswds/uswds": "^3.13.0",
     "snyk": "^1.1295.0"
   },
   "snyk": true,
