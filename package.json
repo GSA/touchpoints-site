@@ -3,6 +3,9 @@
   "private": true,
   "author": "18F",
   "license": "CC0-1.0",
+  "engines": {
+    "node": ">=24.0.0"
+  },
   "scripts": {
     "federalist": "npm run uswds-copy-assets && npm run uswds-build-sass",
     "jekyll-install": "gem install bundler && bundle install",
