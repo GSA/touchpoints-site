@@ -8,8 +8,6 @@ This site contains information and support materials for the Touchpoints product
 This Touchpoints product website is hosted at [touchpoints.digital.gov](https://touchpoints.digital.gov).
 It is a [Federalist](https://federalist.18f.gov/) site hosted on cloud.gov.
 
-Merges to `demo` are deployed to https://demo.touchpoints.digital.gov.
-
 Merges to `main` are deployed to https://touchpoints.digital.gov.
 
 ## Development
