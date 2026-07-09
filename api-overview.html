@@ -39,15 +39,14 @@ $ curl https://api.gsa.gov/analytics/touchpoints/v1/forms/abcd1234/responses --h
               </p>
 
               <p>
-                The legacy <code>/forms/{id}</code> endpoint returns responses in a <code>submissions</code> field
-                that has known issues:
+                The legacy <code>/forms/{id}</code> endpoint returns responses in a <code>submissions</code> field. That field has some known issues:
                 <ol>
               <li>Deleted responses are included.</li>
               <li>Pagination does not work correctly when the responses are filtered by date.</li>
               <li>Pagination links returned by the endpoint refer to the raw API endpoints on the Touchpoints server (which are inaccessible to the public) instead of to the api.data.gov gateway.</li>
               </ol>
 
-              <p>Because these issues could not be resolved in a backwards-compatible way, we've introduced a dedicated endpoint instead. While the legacy endpoint is still valid for retrieving form details, it should be considered deprecated for retrieving form responses.</p>
+              <p>Because these issues could not be resolved in a backwards-compatible way, we've introduced a dedicated responses endpoint instead. While the legacy endpoint is still valid for retrieving form details, it should be considered deprecated for retrieving form responses.</p>
             </section>
           </div>
         </div>
