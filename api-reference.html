@@ -12,25 +12,31 @@ permalink: /api-reference/
     max-width: none;
   }
   #swagger-ui .swagger-ui .info {
-    margin-top: 0;
     margin-bottom: 0;
   }
 </style>
 <script src="{{ site.baseurl }}/assets/swaggerui-dist/swagger-ui-bundle.js"></script>
 <script src="{{ site.baseurl }}/assets/swaggerui-dist/swagger-ui-standalone-preset.js"></script>
 
-<div id="swagger-ui" class="grid-container"></div>
+<main class="grid-container">
+  <div class="usa-alert usa-alert--info usa-alert--slim">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text">
+        'Try it out' is disabled for security reasons. You can download the <a href="https://touchpoints.app.cloud.gov/api/v1/openapi.yml" target="_blank" rel="noopener">OpenAPI specification</a> and use it with your own tools.
+      </p>
+    </div>
+  </div>
+  <div id="swagger-ui" ></div>
+</main>
+
 <script>
   window.onload = () => {
     window.ui = SwaggerUIBundle({
       url: "https://touchpoints.app.cloud.gov/api/v1/openapi.yml",
       dom_id: '#swagger-ui',
       deepLinking: false,
-      presets: [
-        SwaggerUIBundle.presets.apis,
-        SwaggerUIStandalonePreset
-      ],
-      layout: "BaseLayout"
+      layout: "BaseLayout",
+      supportedSubmitMethods: [],
     });
   }
 </script>
