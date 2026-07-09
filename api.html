@@ -1,0 +1,85 @@
+---
+layout: default
+title: Touchpoints API
+permalink: /api-overview
+---
+
+<div class="grid-container">
+  <div class="usa-in-page-nav-container">
+      <aside class="usa-in-page-nav">
+      </aside>
+      <main id="main-content" class="main-content usa-prose">
+        <h1>Touchpoints API</h1>
+        <p>The Touchpoints API is available to all federal employees and contractors who have an active <a href="https://touchpoints.app.cloud.gov/" target="_blank" rel="noopener">Touchpoints</a> account. It provides convenient, programmatic access to retrieve a user's forms and form responses, as well as other, more specialized Customer Experience (CX) domain objects. It is a read-only JSON REST API that utilizes the <a href="https://api.data.gov/" target="_blank" rel="noopener">api.data.gov</a> API gateway.</p>
+
+        <p>The Touchpoints API has no public-facing endpoints.</p>
+
+        <h2 id="getting-started">Getting Started</h2>
+        <p>To begin using the Touchpoints API, you will need to register for an API Key. You can sign up for an API key here:
+          <a href="https://api.data.gov/signup/" target="_blank" rel="noopener">API key signup page on api.data.gov</a>
+        </p>
+        <p>After registration, you will need to provide this API key in the <code>X-Api-Key</code> HTTP header with every API request. </p>
+        <p>Your API key is used to enforce rate limits and monitor usage. Read more about rate limits in the <a href="https://api.data.gov/docs/developer-manual" target="_blank" rel="noopener">api.data.gov documentation</a>.</p>
+        <p>Your API key is also used to authenticate you to Touchpoints. In order to access your Touchpoints data via the API, you must associate your API key with your Touchpoints account. To do so, log into Touchpoints and copy your 40-character API key string into the "API Key" field at the bottom of your Touchpoints <a href="https://touchpoints.app.cloud.gov/profile" target="_blank" rel="noopener">profile page</a>.</p>
+        <img src="{{ site.baseurl }}/assets/img/touchpoints-api-key-field.png" alt="API Key form field" width="400" height="auto">
+
+        <h2 id="example">Example: Get Form Responses</h2>
+        <p>The most common use of the Touchpoints API is to retrieve responses that have been submitted for one of the API user's forms. A request for form responses looks like:</p>
+        {% highlight console %}
+$ curl https://api.gsa.gov/analytics/touchpoints/v1/forms/abcd1234/responses --header "x-api-key: 1234"
+        {% endhighlight %}
+        <p>In this example, <code>1234</code> should be replaced with the user's actual API key and <code>abcd1234</code> should be replaced with the short UUID of the given form.</p>
+
+        <div class="usa-alert usa-alert--warning deprecation-notice">
+          <div class="usa-alert__body">
+            <h4 class="usa-alert__heading">Deprecation notice</h4>
+            <section class="usa-alert__text">
+              <p>
+                The <code>/forms/{id}/responses</code> endpoint was introduced recently to replace the use of the existing <code>/forms/{id}</code> endpoint for retrieving form responses.
+              </p>
+
+              <p>
+                The legacy <code>/forms/{id}</code> endpoint returns responses in a <code>submissions</code> field
+                that has known issues:
+                <ol>
+              <li>Deleted responses are included.</li>
+              <li>Pagination does not work correctly when the responses are filtered by date.</li>
+              <li>Pagination links returned by the endpoint refer to the raw API endpoints on the Touchpoints server (which are inaccessible to the public) instead of to the api.data.gov gateway.</li>
+              </ol>
+
+              <p>Because these issues could not be resolved in a backwards-compatible way, we've introduced a dedicated endpoint instead. While the legacy endpoint is still valid for retrieving form details, it should be considered deprecated for retrieving form responses.</p>
+            </section>
+          </div>
+        </div>
+
+        <h3>Scripting form response retrieval</h3>
+        <p>Many teams export form responses to their chosen analytics platform on a regular cadence. Such a team could use a Python script similar to the one below to pull their responses every 7 days. The script uses the endpoint's request date filtering to only retrieve recent responses, and it uses the endpoint's response pagination links to ensure that all responses are loaded in case the total response count is greater than the default page size of 500.</p>
+
+        {% highlight python %}
+import requests
+from datetime import date, timedelta
+
+API_KEY = "YOUR_API_KEY"
+FORM_ID = "abcd1234"
+
+# Start date = 7 days ago
+start_date = (date.today() - timedelta(days=7)).isoformat()
+
+url = f"https://api.gsa.gov/analytics/touchpoints/v1/forms/{FORM_ID}/responses"
+params = {"start_date": start_date}
+headers = {"X-Api-Key": API_KEY}
+
+# Loop through each page until there is no "next" link
+while url:
+    response = requests.get(url, params=params, headers=headers).json()
+
+    for record in response["data"]:
+        print(record)  # process each response here
+
+    url = response["links"].get("next")  # None when no more pages
+    params = None  # the "next" link already includes query params
+        {% endhighlight %}
+
+      </main>
+  </div>
+</div>

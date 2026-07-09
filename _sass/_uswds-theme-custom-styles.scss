@@ -21,3 +21,15 @@ i.e.
 */
 
 @use "uswds-core" as *;
+
+// Make the API deprecation notice more compact than a standard alert.
+.deprecation-notice {
+  .usa-alert__heading {
+    @include u-font-size("body", "sm");
+  }
+
+  .usa-alert__text,
+  p {
+    @include u-font-size("body", "2xs");
+  }
+}

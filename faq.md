@@ -1,5 +1,5 @@
 ---
-layout: home
+layout: default
 title: Touchpoints Frequently Asked Questions
 permalink: /faq/
 ---
