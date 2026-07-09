@@ -1,0 +1,36 @@
+---
+layout: default
+title: Touchpoints API Reference
+permalink: /api-reference
+---
+
+<link rel="stylesheet" type="text/css" href="/assets/swaggerui-dist/swagger-ui.css" >
+<style>
+  #swagger-ui .swagger-ui .wrapper {
+    margin: 0;
+    padding: 0;
+    max-width: none;
+  }
+  #swagger-ui .swagger-ui .info {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+</style>
+<script src="/assets/swaggerui-dist/swagger-ui-bundle.js"></script>
+<script src="/assets/swaggerui-dist/swagger-ui-standalone-preset.js"></script>
+
+<div id="swagger-ui" class="grid-container"></div>
+<script>
+  window.onload = () => {
+    window.ui = SwaggerUIBundle({
+      url: "https://touchpoints.app.cloud.gov/api/v1/openapi.yml",
+      dom_id: '#swagger-ui',
+      deepLinking: false,
+      presets: [
+        SwaggerUIBundle.presets.apis,
+        SwaggerUIStandalonePreset
+      ],
+      layout: "BaseLayout"
+    });
+  }
+</script>
