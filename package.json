@@ -11,6 +11,7 @@
     "jekyll-install": "gem install bundler && bundle install",
     "serve": "bundle exec jekyll serve",
     "start": "npm install && npm update uswds && npm run jekyll-install && npm run uswds-copy-assets && npm run uswds-copy-theme && npm run uswds-build-sass",
+    "swaggerui-copy-assets": "gulp copySwaggerUi",
     "uswds-build-sass": "gulp compileSass",
     "uswds-copy-assets": "gulp copyAssets",
     "uswds-copy-fonts": "gulp copyFonts",
@@ -22,10 +23,12 @@
   },
   "dependencies": {
     "@uswds/uswds": "^3.13.0",
-    "snyk": "^1.1297.3"
+    "snyk": "^1.1297.3",
+    "swagger-ui-dist": "^5.32.8"
   },
   "snyk": true,
   "devDependencies": {
-    "@uswds/compile": "^1.2.1"
+    "@uswds/compile": "^1.2.1",
+    "gulp": "^5.0.1"
   }
 }

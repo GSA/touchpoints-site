@@ -1,16 +1,4 @@
-/*
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-* * * * * ==============================
-========================================
-========================================
-========================================
-----------------------------------------
-USWDS SASS GULPFILE
-----------------------------------------
-*/
-
+const { src, dest } = require("gulp");
 const uswds = require("@uswds/compile");
 
 uswds.settings.version = 3;
@@ -41,12 +29,21 @@ uswds.paths.dist.js = './assets/uswds/js';
 // Compiled CSS destination
 uswds.paths.dist.css = './assets/uswds/css';
 
+// Swagger UI dist destination
+const swaggerUiDest = './assets/swaggerui-dist';
+
 /*
 ----------------------------------------
 TASKS
 ----------------------------------------
 */
 
+// Copy Swagger UI dist files from node_modules to the assets folder
+function copySwaggerUi() {
+  return src('./node_modules/swagger-ui-dist/**/*').pipe(dest(swaggerUiDest));
+}
+
+exports.copySwaggerUi = copySwaggerUi;
 exports.compile = uswds.compile;
 exports.compileIcons = uswds.compileIcons;
 exports.compileSass = uswds.compileSass;

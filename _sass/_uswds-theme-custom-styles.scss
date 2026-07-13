@@ -21,3 +21,28 @@ i.e.
 */
 
 @use "uswds-core" as *;
+
+// Override usa-prose headings to use the sans-serif font instead of the
+// default heading (serif) font.
+.usa-prose {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: family("sans");
+  }
+}
+
+// Make the API deprecation notice more compact than a standard alert.
+.deprecation-notice {
+  .usa-alert__heading {
+    @include u-font-size("body", "sm");
+  }
+
+  .usa-alert__text,
+  p {
+    @include u-font-size("body", "2xs");
+  }
+}
