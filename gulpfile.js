@@ -40,7 +40,7 @@ TASKS
 
 // Copy Swagger UI dist files from node_modules to the assets folder
 function copySwaggerUi() {
-  return src('./node_modules/swagger-ui/dist/**/*').pipe(dest(swaggerUiDest));
+  return src('./node_modules/swagger-ui-dist/**/*').pipe(dest(swaggerUiDest));
 }
 
 exports.copySwaggerUi = copySwaggerUi;
